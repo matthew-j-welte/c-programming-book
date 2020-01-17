@@ -7,8 +7,8 @@ void count();
 void word_per_line();
 
 int main() {
-    // count();
-    word_per_line();
+    count();
+    // word_per_line();
     return 0;
 }
 
