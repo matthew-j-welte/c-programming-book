@@ -12,6 +12,7 @@ void print_vertical_histogram();
 void word_length_x_axis_printer(int index);
 void char_count_x_axis_printer(int index);
 void space_out(int);
+void zero_arr(int*, int);
 
 int main() {
     // horizontal_histogram();
@@ -23,6 +24,11 @@ int main() {
 void space_out(int spaces) {
     for (int x = 0; x < spaces; ++x)
         putchar(' ');
+}
+
+void zero_arr(int* arr, int size) {
+    for (int i = 0; i <= size; ++i)
+        arr[i] = 0;
 }
 
 void horizontal_histogram() {
@@ -83,9 +89,7 @@ void char_count_x_axis_printer(int index) {
 void count_word_lengths(int upper_lim, int* arr) {
     int c, char_count, state;
     char_count = 0;
-
-    for (int i = 0; i <= upper_lim; ++i)
-        arr[i] = 0;
+    zero_arr(arr, upper_lim);
 
     state = OUT;
     while ((c = getchar()) != EOF) {
@@ -108,9 +112,7 @@ void count_word_lengths(int upper_lim, int* arr) {
 void count_chars(int upper_lim, int* arr) {
     int c;
 
-    for (int i = 0; i <= upper_lim; ++i)
-        arr[i] = 0;
-
+    zero_arr(arr, upper_lim);
     while ((c = getchar()) != EOF) {
         if (c >= 97 && c <= 122)
             ++arr[c - 97];
