@@ -92,23 +92,3 @@ void split_large_word(int last_char) {
     putchar(trailing[FOLD_LIMIT - 1]);
     state_reset();
 }
-
-// cases
-//  (1) Line is not longer than the breakpoint
-//      - putchars until it reaches enter then reset everything
-//  (2) Line is longer than the breakpoint but smaller than the limit
-//      - putchars until you reach the breakpoint
-//      - store each char into the array until you reach an enter
-//      - once you reach an enter DO NOT enter.. first print the chars in the array THEN enter
-//  (3) Line is longer than the limit and the last space occurs at ~115
-//      - putchars until you reach the breakpoint
-//      - store each char into an array until you reach the FOLD_LIMIT
-//      - DO NOT enter, first print the chars until you reach the last enter index
-//      - THEN enter
-//      - then we want to reset everything back to normal and pretend this is a regular scenario
-
-//  (4)** Line is longer than the limit and the last space is before the breakpoint
-
-/*
-Gay bitch comment
-*/
