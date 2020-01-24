@@ -24,6 +24,7 @@ int main() {
 
 void fold_lines() {
     int c;
+
     while((c = getchar()) != EOF) {
         if (space_char(c) == TRUE)
             last_word_index = line_index;
