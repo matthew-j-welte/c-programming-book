@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-#define CLOSED 0
 #define FOUND 1
 #define HARD_BREAK 2
 
