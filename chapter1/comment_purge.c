@@ -66,7 +66,7 @@ int output_until_string_close(int break_char) {
 }
 
 /*
-    Skip outputting chars until a certain char is reached
+    Skip outputting chars until a certain char is reached {{{{}
 */
 int skip_until_char(int break_char) {
     int c;
