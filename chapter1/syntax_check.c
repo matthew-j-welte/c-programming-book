@@ -88,6 +88,7 @@ int skip_until_adjacent_chars(int c1, int c2) {
     }
 }
 
+// Look for chars with grouping capabilities
 void inspect(int c) {
     if (c == '{')
         ++brace_count;
