@@ -5,10 +5,13 @@ unsigned setbits(unsigned x, int p, int n, unsigned y);
 unsigned invert(unsigned x, int p, int n);
 unsigned clear_range(unsigned x, int begin, int end);
 unsigned rightrot(int x, int n);
+int bitcount(unsigned x);
 
 int main() {
     printf("%u\n", setbits(20, 4, 2, 7));
     printf("%u\n", invert(20, 2, 3));
+    printf("%u\n", bitcount(23));
+    printf("%u\n", bitcount(0));
     return 0;
 }
 
@@ -38,4 +41,11 @@ unsigned clear_range(unsigned x, int begin, int end) {
 
 unsigned rightrot(int x, int n) {
     return x >> n;
+}
+
+int bitcount(unsigned x) {
+    int count;
+    for(count = 0; x != 0; x&= (x-1))
+        ++count;
+    return count;
 }
