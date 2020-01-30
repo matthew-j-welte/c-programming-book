@@ -12,6 +12,10 @@ int main() {
     char d[100];
     unescape(d,c);
     printf("%s\n", d);
+    char e[] = "Hello\\nThere\\t\\tDog\\Whats\\Up";
+    char f[100];
+    unescape(f,e);
+    printf("%s\n", f);
     return 0;
 }
 
