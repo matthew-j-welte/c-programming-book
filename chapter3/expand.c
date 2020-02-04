@@ -3,9 +3,10 @@
 
 void expand(char s1[], char s2[]);
 int fill_until(char start, char end, int ind, char s2[]);
+int valid_char_range(char a, char b);
 
 int main() {
-    char a[100] = "Helloa-d\n0-40-5\nC-F\nF-A\n5-2\n----";
+    char a[100] = "Helloa-d\n0-40-5\nC-F\nF-A\n5-2\n----\na-C  0-F";
     char b[100];
     expand(a,b);
     printf("%s\n", b);
@@ -44,12 +45,9 @@ void expand(char s1[], char s2[]) {
 }
 
 int fill_until(char start, char end, int ind, char s2[]) {
-    int c, both_lower, both_upper, both_digit;
+    int c;
     c = start;
-    both_lower = islower(start) && islower(end);
-    both_upper = isupper(start) && isupper(end);
-    both_digit = isdigit(start) && isdigit(end);
-    if (!both_lower && !both_upper && !both_digit) {
+    if (!valid_char_range(start, end)) {
         s2[ind++] = '-';
         s2[ind] = end;
         return ind;
@@ -60,4 +58,12 @@ int fill_until(char start, char end, int ind, char s2[]) {
     for (; c != end + increment; ++ind, c += increment)
         s2[ind] = c;
     return --ind;
+}
+
+int valid_char_range(char a, char b) {
+    int c, both_lower, both_upper, both_digit;
+    both_lower = islower(a) && islower(b);
+    both_upper = isupper(a) && isupper(b);
+    both_digit = isdigit(a) && isdigit(b);
+    return both_lower || both_upper || both_digit;
 }
