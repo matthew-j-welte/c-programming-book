@@ -11,7 +11,7 @@ int valid_base(int base);
 
 int main() {
     char a[100];
-    itob(35, 37, a);
+    itoa(789465, a);
     printf("%s\n", a);
 
     // char b[100];
@@ -32,23 +32,7 @@ void reverse(char str[]) {
 }
 
 void itoa(int n, char str[]) {
-    int i, sign, orig;
-    orig = n;
-    if (orig == min_int)
-        n += 1;
-
-    if ((sign = n) < 0)
-        n = -n;
-    i = 0;
-    do {
-        str[i++] = n % 10 + '0';
-    } while ((n /= 10) > 0);
-    if (sign < 0)
-        str[i++] = '-';
-    str[i] = '\0';
-    reverse(str);
-    if (orig == min_int)
-        str[i - 1]++;
+    itob(n, 10, str);
 }
 
 void itoa_width(int n, int width, char str[]) {
@@ -91,7 +75,6 @@ void itob(int n, int base, char str[]) {
             c += 7;
         str[i++] = c + '0';
     } while ((n /= base) > 0);
-
 
     if (sign < 0)
         str[i++] = '-';
