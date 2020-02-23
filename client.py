@@ -50,8 +50,7 @@ class QueryResolver:
         joined_field = "".join(x[0].upper() + x[1:] for x in field_partitions)
         return joined_field[0].lower() + joined_field[1:]
 
-    def resolve(self, query_name):
-        # assert the passed in query is in the query object
+    def resolve(self, query_name, **kwargs):
         def inner_resolve(graphene_obj):
             fields = self.get_graphene_fields(graphene_obj)
             scalars = list(self.extract_scalars(graphene_obj))
@@ -61,36 +60,18 @@ class QueryResolver:
                     built_fields.append(self.snake_to_camel(mem))
                 else:
                     field_type = getattr(graphene_obj, mem)._type
-                    built_fields.append(GqlQuery().fields(inner_resolve(field_type), name = self.snake_to_camel(mem)).generate())
+                    built_fields.append(GqlQuery().fields(inner_resolve(field_type), name=self.snake_to_camel(mem)).generate())
             return built_fields
 
+        # mp = MetaParams(task_id = "2000", application = "WELTE-APP", post = Post())
+        # for x in inspect.getmembers(mp):
+        #     print(x)
+
         query_obj = getattr(self.parent_obj, query_name)._type
-        fields = GqlQuery().fields(inner_resolve(query_obj)).query(self.snake_to_camel(query_name)).operation().generate()
+        camel_kwargs = {self.snake_to_camel(k):v for k,v in kwargs.items()}
+        fields = GqlQuery().fields(inner_resolve(query_obj)).query(self.snake_to_camel(query_name), input=camel_kwargs).operation().generate()
         print(fields)
 
-"""
-query {
-    get_metadata {
-        application 
-        iid 
-        post { 
-            status 
-            timestamp 
-            user { 
-                age 
-                name 
-            } 
-        } 
-        task_id 
-    } 
-}
-"""
-
-        # members = [x for x in inspect.getmembers(q) if not x[0].startswith("_") and x[0] not in ("create_type", "is_type_of")]
-        # If all fields are scalar that is the base case of the recursive function
-        # print(members)
-
-
 qr = QueryResolver(Query)
-qr.resolve("get_metadata")
+qr.resolve("get_metadata", task_id = "2000")
         
